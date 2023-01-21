@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/order-service
+    driver-class-name: org.postgresql.Driver
+    username: test
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: update
+  application:
+    name: order-service
+server:
+  error:
+    include-message: always
+  port: 8081
+
+clients:
+  inventory-service:
+    base-url: http://inventory-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

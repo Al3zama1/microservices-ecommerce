@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/inventory-service
+    driver-class-name: org.postgresql.Driver
+    username: test
+    password: test
+  jpa:
+    hibernate:
+#      in production this field should be set to none and make changes to the db
+#      through a db migration tool like flyway
+      ddl-auto: create-drop
+  application:
+    name: inventory-service
+server:
+#  since we want to be able to create multiple instances of this service, we don't want to
+#  hard code the port. By putting 0 spring will pick a random available port
+  port: 0
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}:${random.value}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

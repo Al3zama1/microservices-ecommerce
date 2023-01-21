@@ -1,0 +1,7 @@
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/product-service/src/main/java/com/example/productservice/dto/ProductResponse.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/product-service/src/main/java/com/example/productservice/dto/ProductRequest.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/product-service/src/main/java/com/example/productservice/ProductServiceApplication.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/product-service/src/main/java/com/example/productservice/service/ProductService.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/product-service/src/main/java/com/example/productservice/repository/ProductRepository.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/product-service/src/main/java/com/example/productservice/controller/ProductController.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/product-service/src/main/java/com/example/productservice/model/Product.java

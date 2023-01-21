@@ -1,0 +1,5 @@
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/inventory-service/src/main/java/com/example/inventoryservice/InventoryServiceApplication.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/inventory-service/src/main/java/com/example/inventoryservice/model/Inventory.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/inventory-service/src/main/java/com/example/inventoryservice/repository/InventoryRepository.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/inventory-service/src/main/java/com/example/inventoryservice/controller/InventoryController.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/inventory-service/src/main/java/com/example/inventoryservice/service/InventoryService.java

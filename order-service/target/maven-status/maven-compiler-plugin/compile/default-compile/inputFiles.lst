@@ -1,0 +1,8 @@
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/order-service/src/main/java/com/example/orderservice/model/OrderLineItem.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/order-service/src/main/java/com/example/orderservice/dto/OrderRequest.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/order-service/src/main/java/com/example/orderservice/controller/OrderController.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/order-service/src/main/java/com/example/orderservice/dto/OrderLineItemsDto.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/order-service/src/main/java/com/example/orderservice/OrderServiceApplication.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/order-service/src/main/java/com/example/orderservice/service/OrderService.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/order-service/src/main/java/com/example/orderservice/repository/OrderRepository.java
+/Users/al3zama1/Workspace/java/resume-projects/microservices-ecommerce/order-service/src/main/java/com/example/orderservice/model/Order.java
