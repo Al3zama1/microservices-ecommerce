@@ -28,3 +28,19 @@ services:
       POSTGRES_PASSWORD: test
       POSTGRES_USER: test
       POSTGRES_DB: inventory-service
+  keycloak:
+    image: keycloak/keycloak:20.0.3
+    command:
+      - "start-dev --http-relative-path /auth --import-realm --auto-build"
+    environment:
+      KEYCLOAK_DB: dev-file
+      KEYCLOAK_ADMIN: keycloak
+      KEYCLOAK_ADMIN_PASSWORD: keycloak
+      KEYCLOAK_FEATURES: scripts
+    volumes:
+      - type: bind
+        source: ./keycloak
+        target: /opt/keycloak/data/import
+        read_only: true
+    ports:
+      - "8888:8080"
