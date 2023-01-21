@@ -4,17 +4,17 @@ services:
     image: mongo:6.0.3
     restart: always
     ports:
-      - 27017:27017
+      - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: test
-      MONGO_INITDB_ROOT_PASSWORD: test
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: s3cret
       MONGO_INITDB_DATABASE: product-service
 
   order-service:
     image: postgres:15.1
     restart: always
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: test
       POSTGRES_USER: test
@@ -23,7 +23,7 @@ services:
     image: postgres:15.1
     restart: always
     ports:
-      - 5433:5432
+      - "5433:5432"
     environment:
       POSTGRES_PASSWORD: test
       POSTGRES_USER: test

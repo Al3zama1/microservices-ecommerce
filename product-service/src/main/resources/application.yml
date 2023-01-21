@@ -1,13 +1,17 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/product-service
-      username: test
-      password: test
+      host: localhost
+      port: 27017
+      database: product-service
+      authentication-database: admin
+      password: s3cret
+      username: admin
   application:
     name: product-service
-
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
+server:
+  port: 0
