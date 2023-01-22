@@ -44,3 +44,7 @@ services:
         read_only: true
     ports:
       - "8888:8080"
+  zipkin:
+    image: openzipkin/zipkin:2.24-arm64
+    ports:
+      - "9411:9411"

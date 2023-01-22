@@ -11,6 +11,12 @@ spring:
       ddl-auto: create-drop
   application:
     name: inventory-service
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+#     % of request received that should be sent to zipkin for tracing
+      probability: 1.0
 server:
 #  since we want to be able to create multiple instances of this service, we don't want to
 #  hard code the port. By putting 0 spring will pick a random available port
