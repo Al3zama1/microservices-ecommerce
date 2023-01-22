@@ -1,4 +1,6 @@
 eureka:
+  username: ${EUREKA_USERNAME:eureka}
+  password: ${EUREKA_PASSWORD:s3cret}
   instance:
     hostname: localhost
   client:
