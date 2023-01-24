@@ -15,6 +15,20 @@ spring:
     sampler:
 #     % of request received that should be sent to zipkin for tracing
       probability: 1.0
+  kafka:
+    bootstrap-servers: localhost:9092
+    template:
+      default-topic: notificationTopic
+#   provide info to the spring boot project how to serialize the key and value paris
+#   when sending to the kafka broker
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+#       for spring to know how to  map between these two classes that are coming from
+#       two different fully qualified names
+#       token value(random value -> event):fully qualified class name
+        spring.json.type.mapping: event:com.example.orderservice.event.OrderPlacedEvent
 server:
   error:
     include-message: always
