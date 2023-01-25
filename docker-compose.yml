@@ -1,76 +1,39 @@
 version: '3.8'
 services:
-  postgres-order:
-    image: postgres:15.1
-    container_name: postgres-order
+  product-service:
+    image: mongo:6.0.3
     restart: always
     ports:
-      - "5431:5431"
+      - "27017:27017"
     environment:
-      POSTGRES_PASSWORD: test
-      POSTGRES_USER: test
-      POSTGRES_DB: order-service
-#     where to store all the database related information
-      PGDATA: /data/postgres
-    volumes:
-      - ./postgres-order:/data/postgres
-    expose:
-      - "5431"
-#   we have to provide this command since we are not using the default postgres port 5432
-    command:
-      - -p 5431
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: s3cret
+      MONGO_INITDB_DATABASE: product-service
 
-  postgres-inventory:
+  order-service:
     image: postgres:15.1
-    container_name: postgres-inventory
     restart: always
     ports:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: test
       POSTGRES_USER: test
-      POSTGRES_DB: inventory-service
-      PGDATA: /data/postgres
-    volumes:
-      - ./postgres-inventory:/data/postgres
-
-  mongo:
-    image: mongo:6.0.3
-    container_name: mongo
+      POSTGRES_DB: order-service
+  inventory-service:
+    image: postgres:15.1
     restart: always
     ports:
-      - "27017:27017"
-    expose:
-      - "27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: test
-      MONGO_INITDB_ROOT_PASSWORD: test
-      MONGO_INITDB_DATABASE: product-service
-    volumes:
-      - ./mongo-data:/data/db
-
-  keycloak-postgres:
-    container_name: keycloak-postgres
-    image: postgres:15.1
+      - "5433:5432"
     environment:
       POSTGRES_PASSWORD: test
       POSTGRES_USER: test
-      MYSQL_ROOT_PASSWORD: root
-      POSTGRES_DB: keycloak
-    volumes:
-      - ./postgres_keycloak_data:/var/lib/postgresql
-
+      POSTGRES_DB: inventory-service
   keycloak:
     image: keycloak/keycloak:20.0.3
-    container_name: keycloak
     command:
       - "start-dev --http-relative-path /auth --import-realm --auto-build"
     environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: keycloak
-      DB_USER: test
-      DB_PASSWORD: test
+      KEYCLOAK_DB: dev-file
       KEYCLOAK_ADMIN: keycloak
       KEYCLOAK_ADMIN_PASSWORD: keycloak
       KEYCLOAK_FEATURES: scripts
@@ -79,12 +42,12 @@ services:
         source: ./keycloak
         target: /opt/keycloak/data/import
         read_only: true
-#      - ./keycloak-realms/opt/keycloak/data/import/
     ports:
-      - "8080:8080"
-    depends_on:
-      - keycloak-postgres
-
+      - "8888:8080"
+  zipkin:
+    image: openzipkin/zipkin:2.24-arm64
+    ports:
+      - "9411:9411"
   zookeeper:
     image: confluentinc/cp-zookeeper:7.3.0
     container_name: zookeeper
@@ -92,7 +55,6 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
 #     interval at which zookeeper will send heart beat
       ZOOKEEPER_TICK_TIME: 2000
-
   broker:
     image: confluentinc/cp-kafka:7.3.0
     container_name: broker
@@ -110,83 +72,3 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-
-  zipkin:
-    image: openzipkin/zipkin:2.24-arm64
-    container_name: zipkin
-    ports:
-      - "9411:9411"
-
-  discovery-server:
-    image: al3zama/discovery-server:latest
-    container_name: discovery-server
-    pull_policy: always
-    ports:
-      - "8761:8761"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - zipkin
-
-  api-gateway:
-    image: al3zama/api-gateway:latest
-    container_name: api-gateway
-    pull_policy: always
-    ports:
-      - "8181:8080"
-    expose:
-      - "8181"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY=TRACE
-    depends_on:
-      - zipkin
-      - discovery-server
-      - keycloak
-
-  product-service:
-    container_name: product-service
-    image: al3zama/product-service:latest
-    pull_policy: always
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - mongo
-      - discovery-server
-      - api-gateway
-
-  order-service:
-    container_name: order-service
-    image: al3zama/order-service
-    pull_policy: always
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - postgres-order
-      - broker
-      - zipkin
-      - discovery-server
-      - api-gateway
-
-  inventory-service:
-    container_name: inventory-service
-    image: al3zama/inventory-service
-    pull_policy: always
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - postgres-inventory
-      - discovery-server
-      - api-gateway
-
-  notification-service:
-    container_name: notification-service
-    image: al3zama/notification-service
-    pull_policy: always
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - zipkin
-      - broker
-      - discovery-server
-      - api-gateway

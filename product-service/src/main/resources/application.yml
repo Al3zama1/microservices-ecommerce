@@ -5,8 +5,8 @@ spring:
       port: 27017
       database: product-service
       authentication-database: admin
-      password: test
-      username: test
+      password: s3cret
+      username: admin
   application:
     name: product-service
   zipkin:
