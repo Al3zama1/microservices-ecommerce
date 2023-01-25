@@ -1,8 +1,12 @@
+com/example/orderservice/event/OrderPlacedEvent.class
 com/example/orderservice/OrderServiceApplication.class
 com/example/orderservice/model/Order.class
-com/example/orderservice/controller/OrderController.class
+com/example/orderservice/config/WebClientConfig.class
 com/example/orderservice/service/OrderService.class
-com/example/orderservice/dto/OrderRequest.class
 com/example/orderservice/repository/OrderRepository.class
+com/example/orderservice/controller/OrderController.class
+com/example/orderservice/dto/InventoryResponse$InventoryResponseBuilder.class
+com/example/orderservice/dto/OrderRequest.class
 com/example/orderservice/model/OrderLineItem.class
 com/example/orderservice/dto/OrderLineItemsDto.class
+com/example/orderservice/dto/InventoryResponse.class

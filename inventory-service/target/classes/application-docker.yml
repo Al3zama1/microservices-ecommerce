@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres-inventory:5432/inventory-service
+    username: test
+    password: test
+    driver-class-name: org.postgresql.Driver
+  zipkin:
+    base-url: http://zipkin:9411
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:s3cret@discovery-server:8761/eureka
