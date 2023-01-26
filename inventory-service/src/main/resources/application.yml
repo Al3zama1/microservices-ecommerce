@@ -28,3 +28,15 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://eureka:s3cret@localhost:8761/eureka
+
+#  actuator properties
+management:
+  # by default all the health endpoints are exposed by actuator -> actuator/health
+  endpoints:
+    web:
+      exposure:
+        #       also expose the prometheus actuator endpoint in actuator -> /actuator/prometheus
+        include: prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}

@@ -16,7 +16,6 @@ spring:
     sampler:
 #     % of request received that should be sent to zipkin for tracing
       probability: 1.0
-
   cloud:
     gateway:
       routes:
@@ -50,6 +49,18 @@ spring:
             http://localhost:8761
           predicates:
             - Path=/eureka/**
+
+#  actuator properties
+management:
+  # by default all the health endpoints are exposed by actuator -> actuator/health
+  endpoints:
+    web:
+      exposure:
+        #       also expose the prometheus actuator endpoint in actuator -> /actuator/prometheus
+        include: prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 
 logging:

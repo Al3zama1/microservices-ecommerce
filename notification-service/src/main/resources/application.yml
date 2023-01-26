@@ -32,3 +32,15 @@ eureka:
 
 server:
   port: 0
+
+#  actuator properties
+management:
+  # by default all the health endpoints are exposed by actuator -> actuator/health
+  endpoints:
+    web:
+      exposure:
+        #       also expose the prometheus actuator endpoint in actuator -> /actuator/prometheus
+        include: prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
