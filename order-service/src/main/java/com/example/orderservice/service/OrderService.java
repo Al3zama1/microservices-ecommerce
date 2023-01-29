@@ -8,6 +8,7 @@ import com.example.orderservice.model.Order;
 import com.example.orderservice.model.OrderLineItem;
 import com.example.orderservice.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.sleuth.Span;
 import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -22,6 +23,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class OrderService {
 
     private final OrderRepository orderRepository;
@@ -43,6 +45,7 @@ public class OrderService {
         List<String> skuCodes = order.getOrderLineItemList().stream()
                 .map(OrderLineItem::getSkuCode)
                 .toList();
+
 
         /*
         create custom span to track specific code logic that would be left out due to being executed in a separate thread

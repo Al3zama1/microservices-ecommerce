@@ -95,3 +95,44 @@ services:
     environment:
       GF_SECURITY_ADMIN_USER: test
       GF_SECURITY_ADMIN_PASSWORD: test
+
+#  elastic-search:
+#    container_name: elastic-search
+#    image: elasticsearch:8.6.0
+#    restart: always
+#    volumes:
+#      - elastic_data:/usr/share/elasticsearch/data/
+#    environment:
+#      ES_JAVA_OPTS: '-Xmx256m -Xms256m'
+#      discovery.type: single-node # single node cluster
+#      xpack.security.enrollment.enabled: true
+#    ports:
+#      - '9200:9200'
+#      - '9300:9300'
+#
+#  logstash:
+#    container_name: logstash
+#    image: logstash:8.6.0
+#    restart: always
+#    volumes:
+#      - ./logstash/:/logstash_dir
+#    command: logstash -f /logstash_dir/logstash.conf
+#    depends_on:
+#      - elastic-search
+#    ports:
+#      - '9600:9600'
+#    environment:
+#      LS_JAVA_OPTS: '-Xmx256m -Xms256m'
+#
+#  kibana:
+#    container_name: kibana
+#    image: kibana:8.6.0
+#    restart: always
+#    ports:
+#      - '5601:5601'
+#    environment:
+#      - ELASTICSEARCH_URL=http://elastic-search:9200
+#    depends_on:
+#      - elastic-search
+#volumes:
+#  elastic_data: {}
